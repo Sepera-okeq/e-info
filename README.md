@@ -2,6 +2,10 @@
 
 Добро пожаловать в E-Info - ваш источник знаний по информатике! Наш проект представляет собой веб-сайт онлайн школы, где вы можете расширить свои знания в области программирования и информационных технологий.
 
+Ихний диск: https://disk.yandex.ru/d/SLYGuDZ63GB37A
+
+Ихонное тезе: https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FzfXxv91FjchENCxP79FoXmjr22XJERzEYusLWZD5MwrtZAMj0sX2NhpMRMkzA5z1RmR%2F0fePyGwwW%2FWKW0%2FCEA%3D%3D%3A%2FТехническое%20задание.pdf&name=Техническое%20задание.pdf
+
 ## Описание
 
 //TODO: Отсуствует по причине отсуствия ТЗ...
