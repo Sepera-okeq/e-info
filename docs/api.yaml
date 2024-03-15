@@ -1,0 +1,284 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "E-Info API"
+  description: "API для веб-платформы E-Info, предоставляющей образовательные услуги дистанционно."
+host: "e-info.com"
+schemes:
+- "https"
+paths:
+  /account/register:
+    post:
+      summary: "Регистрация ученика"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Информация о новом ученике"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        200:
+          description: "Успешная регистрация"
+          schema:
+            $ref: "#/definitions/Student"
+        400:
+          description: "Неверные данные"
+  /account/login:
+    post:
+      summary: "Вход в систему"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Данные для входа"
+        required: true
+        schema:
+          $ref: "#/definitions/Login"
+      responses:
+        200:
+          description: "Успешный вход"
+          schema:
+            $ref: "#/definitions/Token"
+        400:
+          description: "Неверные данные"
+  /account/reset-password:
+    post:
+      summary: "Сброс пароля ученика"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Сброс пароля ученика"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        200:
+          description: "Успешно выслан код на почту"
+          schema:
+            $ref: "#/definitions/Student"
+        400:
+          description: "Неверные данные"
+  /account/verify:
+    post:
+      summary: "Верфикация ученика"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Верфикация ученика"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        200:
+          description: "Успешно верифицирован"
+          schema:
+            $ref: "#/definitions/Student"
+        400:
+          description: "Неверные данные"
+  /account/profile:
+    get:
+      summary: "Получение профиля ученика"
+      responses:
+        200:
+          description: "Успешное получение профиля"
+          schema:
+            $ref: "#/definitions/Student"
+        401:
+          description: "Неавторизованный запрос"
+    put:
+      summary: "Обновление профиля ученика"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Новые данные профиля"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        200:
+          description: "Успешное обновление профиля"
+          schema:
+            $ref: "#/definitions/Student"
+        400:
+          description: "Неверные данные"
+        401:
+          description: "Неавторизованный запрос"
+  /calendar:
+    get:
+      summary: "Получение календаря ученика"
+      responses:
+        200:
+          description: "Успешное получение календаря"
+          schema:
+            $ref: "#/definitions/Calendar"
+        401:
+          description: "Неавторизованный запрос"
+  /homework:
+    get:
+      summary: "Получение домашних заданий ученика"
+      responses:
+        200:
+          description: "Успешное получение домашних заданий"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Homework"
+        401:
+          description: "Неавторизованный запрос"
+    post:
+      summary: "Отправка выполненного домашнего задания"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Выполненное домашнее задание"
+        required: true
+        schema:
+          $ref: "#/definitions/Homework"
+      responses:
+        200:
+          description: "Успешная отправка домашнего задания"
+        400:
+          description: "Неверные данные"
+        401:
+          description: "Неавторизованный запрос"
+  /feedback/new:
+    post:
+      summary: "Отправка обратной связи"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Сообщение обратной связи"
+        required: true
+        schema:
+          $ref: "#/definitions/Feedback"
+      responses:
+        200:
+          description: "Успешная отправка обратной связи"
+        400:
+          description: "Неверные данные"
+  /subscriptions:
+    get:
+      summary: "Получение списка тарифов"
+      responses:
+        200:
+          description: "Успешное получение списка тарифов"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Tariff"
+  /subscriptions/new:
+    post:
+      summary: "Запись на курс"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Данные для записи на курс"
+        required: true
+        schema:
+          $ref: "#/definitions/Enrollment"
+      responses:
+        200:
+          description: "Успешная запись на курс"
+        400:
+          description: "Неверные данные"
+        401:
+          description: "Неавторизованный запрос"
+  /lessons:
+    get:
+      summary: "Получение списка уроков"
+      responses:
+        200:
+          description: "Успешное получение списка уроков"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Lesson"
+        401:
+          description: "Неавторизованный запрос"
+  /lessons/[id]:
+    get:
+      summary: "Получение данных об конкретном уроке"
+      responses:
+        200:
+          description: "Успешное получение об конкретном уроке"
+          schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/Lesson"
+        401:
+          description: "Неавторизованный запрос"
+definitions:
+  Student:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+  Login:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+  Token:
+    type: "object"
+    properties:
+      token:
+        type: "string"
+  Calendar:
+    type: "object"
+    properties:
+      events:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            title:
+              type: "string"
+            date:
+              type: "string"
+            time:
+              type: "string"
+  Homework:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      deadline:
+        type: "string"
+      file:
+        type: "string"
+  Feedback:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+  Tariff:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      price:
+        type: "number"
+  Enrollment:
+    type: "object"
+    properties:
+      tariffId:
+        type: "string"
+  Lesson:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      videoUrl:
+        type: "string"
