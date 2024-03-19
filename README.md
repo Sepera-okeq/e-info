@@ -1,27 +1,57 @@
 # E-Info - Онлайн школа по информатике
 
-Добро пожаловать в E-Info - ваш источник знаний по информатике! Наш проект представляет собой веб-сайт онлайн школы, где вы можете расширить свои знания в области программирования и информационных технологий.
-
-Ихний диск: https://disk.yandex.ru/d/SLYGuDZ63GB37A
-
-Ихонное тезе: https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FzfXxv91FjchENCxP79FoXmjr22XJERzEYusLWZD5MwrtZAMj0sX2NhpMRMkzA5z1RmR%2F0fePyGwwW%2FWKW0%2FCEA%3D%3D%3A%2FТехническое%20задание.pdf&name=Техническое%20задание.pdf
-
 ## Описание
 
-//TODO: Отсуствует по причине отсуствия ТЗ...
+Добро пожаловать в E-Info - ваш источник знаний по информатике! Наш проект представляет собой веб-сайт онлайн школы, где вы можете расширить свои знания в разных областях удаленно.
+
+Материалы: [Yandex.Disk](https://disk.yandex.ru/d/SLYGuDZ63GB37A)
+
+Техническое задание: [Yandex.Disk](https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2FzfXxv91FjchENCxP79FoXmjr22XJERzEYusLWZD5MwrtZAMj0sX2NhpMRMkzA5z1RmR%2F0fePyGwwW%2FWKW0%2FCEA%3D%3D%3A%2FТехническое%20задание.pdf&name=Техническое%20задание.pdf&nosw=1)
 
 ## Технологии
 
-//TODO: Отсуствует по причине отсуствия ТЗ...
+### Frontend
+
+- Next.js
+- Radix UI
+- TailwindCSS
+
+Подробнее можно найти [здесь](/frontend/package.json)
+
+### Backend
+
+- Python
+- Django
+
+Подробнее можно найти [здесь](/backend/req.txt)
 
 ## Установка и запуск
 
-//TODO: Отсуствует по причине отсуствия ТЗ...
+### Запуск backend
 
-## Вклад
+```bash
+cd backend
+cd back
+python manage.py runserver
+```
 
-//TODO: Отсуствует по причине отсуствия ТЗ...
+### Работа frontend
 
+#### Работа в live режиме
+
+```bash
+cd frontend 
+pnpm i
+pnpm dev
+```
+
+#### Сборка статичной версии
+
+```bash
+cd frontend 
+pnpm i
+pnpm build
+```
 
 ---
 
