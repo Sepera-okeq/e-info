@@ -1,24 +1,20 @@
-import json
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import StudentSerializer
 
-from django.shortcuts import render
+class StudentList(APIView):
+    def post(self, request):
+        data = StudentSerializer(data=request.data)
+        if data.is_valid():
+            data.save()
+            return Response(data.data, status=status.HTTP_200_OK)
+        return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
 
-from django.http import HttpResponse
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-
-def sonya(request):
-    return HttpResponse("Соняяяяяя")
-
-@csrf_exempt 
-def account_register(request):
-    if request.method != "POST":
-        return HttpResponse("404 Ты дурак")
-
-    student = json.loads(request.body)
-    # тут регистрируем
-
-    return JsonResponse(student)
+# def index(request):
+#     return HttpResponse("Hello, world. You're at the polls index.")
+#
+#
+# def sonya(request):
+#     return HttpResponse("Соняяяяяя")
