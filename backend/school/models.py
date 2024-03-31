@@ -10,5 +10,44 @@ class Article(models.Model):
         return self.title
 
 
-class Student:
-    pass
+class Student(models.Model):
+    name = models.TextField()
+    email = models.TextField()
+    password = models.TextField()
+    tariff = models.ForeignKey('Tariff', on_delete=models.CASCADE)
+
+
+class Token(models.Model):
+    token = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Events(models.Model):
+    title = models.TextField()
+    time = models.DateTimeField(auto_now_add=True)
+
+
+class Homework(models.Model):
+    title = models.TextField()
+    description = models.TextField()
+    deadline = models.DateTimeField()
+    file = models.BinaryField()
+    regarding = models.ForeignKey('Lesson', on_delete=models.CASCADE)
+
+
+class Feedback(models.Model):
+    message = models.TextField()
+    author = models.ForeignKey('Student', on_delete=models.CASCADE)
+
+
+class Tariff(models.Model):
+    title = models.TextField()
+    description = models.TextField()
+    price = models.IntegerField()
+
+
+class Lesson(models.Model):
+    title = models.TextField()
+    description = models.TextField()
+    videoURL = models.TextField()
+
