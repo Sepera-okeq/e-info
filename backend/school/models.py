@@ -14,7 +14,7 @@ class Student(models.Model):
     name = models.TextField()
     email = models.TextField()
     password = models.TextField()
-    tariff = models.ForeignKey('Tariff', on_delete=models.CASCADE)
+    tariff = models.ForeignKey('Tariff', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Token(models.Model):
