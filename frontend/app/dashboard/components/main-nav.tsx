@@ -35,12 +35,6 @@ export function MainNav({
       >
         Календарь
       </Link>
-      <Link
-        href="/dashboard/settings"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Настройки
-      </Link>
     </nav>
   )
 }

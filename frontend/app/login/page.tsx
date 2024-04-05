@@ -87,7 +87,7 @@ export default function LoginPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="example@example.com" {...field} />
+                        <Input placeholder="example@example.com" type="email" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
