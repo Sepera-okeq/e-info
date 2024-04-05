@@ -1,18 +1,14 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "Next.js",
+  name: "E-Info",
   description:
-    "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.",
+    "E-Info - ваш источник знаний по различным областям!",
   mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    github: "https://github.com/Sepera-okeq/e-info",
+    docs: "https://https://github.com/Sepera-okeq/e-info/docs",
+    api: "https://api.example.com"
   },
 }
