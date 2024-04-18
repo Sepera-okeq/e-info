@@ -6,15 +6,7 @@ from .serializers import *
 from .models import *
 
 
-class StudentList(APIView):
-    #уточнить
-    def get(self, request, email):
-        try:
-            student = Student.objects.get(email=email)
-            serializer = StudentSerializer(student)
-            return Response({"message": "Успешное получение профиля"}, status=status.HTTP_200_OK)
-        except Student.DoesNotExist:
-            return Response({"error": "Неавторизованный запрос"}, status=status.HTTP_401_UNAUTHORIZED)
+class RegisterView(APIView):
     def post(self, request):
         data = StudentSerializer(data=request.data)
         if data.is_valid():
