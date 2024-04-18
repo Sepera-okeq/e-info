@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import check_password
 
 # Create your models here.
 class Article(models.Model):
@@ -16,6 +17,8 @@ class Student(models.Model):
     password = models.TextField()
     tariff = models.ForeignKey('Tariff', on_delete=models.CASCADE, blank=True, null=True)
 
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
 
 class Token(models.Model):
     token = models.TextField()

@@ -23,9 +23,8 @@ class LoginView(APIView):
             password = data.validated_data['password']
             try:
                 student = Student.objects.get(email=email)
-                if student.password == password:
+                if student.check_password(password):
                     token = Token.objects.create()
-                    token.save()  # пока сохраняет пустую строку
                     return Response({"message": "Успешный вход"}, status=status.HTTP_200_OK)
                 else:
                     return Response({"error": "Неверные данные"}, status=status.HTTP_400_BAD_REQUEST)
