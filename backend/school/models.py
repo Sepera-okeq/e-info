@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Article(models.Model):
@@ -11,7 +12,7 @@ class Article(models.Model):
         return self.title
 
 
-class Student(models.Model):
+class Student(AbstractUser):
     name = models.TextField()
     email = models.TextField()
     password = models.TextField()
