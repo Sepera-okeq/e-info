@@ -50,6 +50,20 @@ export default function RegisterPage() {
   })
  
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    const url = 'http://127.0.0.1:8000/school/account/register';
+    console.log(JSON.stringify(data))
+    fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: '{JSON.stringify(data)}'
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
     toast({
       title: "Вы ввели следующие значения:",
       description: (
