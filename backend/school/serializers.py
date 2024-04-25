@@ -27,3 +27,9 @@ class ResetPasswordSerializer(serializers.Serializer):
 class VerifyStudentSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     verification_code = serializers.CharField(required=True)
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ['name', 'email', 'tariff']

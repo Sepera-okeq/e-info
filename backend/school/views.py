@@ -55,8 +55,13 @@ class VerifyStudentView(APIView):
             # как-то проверяем код
 
 class ProfileView(APIView):
-    permission_classes = [IsAuthenticated] #хочим чтобы пользователь был аутенфицирован
     def get(self, request):
-        student = request.user
-        serializer = StudentSerializer(student)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        if request.user.is_authenticated:
+            try:
+                student = Student.objects.get(email=request.user.email)
+                serializer = ProfileSerializer(student)
+                return Response({"message": " Успешное получение профиля"}, status=status.HTTP_200_OK)
+            except Student.DoesNotExist:
+                return Response({"error": "Неавторизованный запрос"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"error": "Необходима аутентификация"}, status=status.HTTP_401_UNAUTHORIZED)
