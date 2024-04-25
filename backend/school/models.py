@@ -21,9 +21,11 @@ class Student(AbstractUser):
     def check_password(self, raw_password):
         return check_password(raw_password, self.password)
 
+
 class Token(models.Model):
     token = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Events(models.Model):
