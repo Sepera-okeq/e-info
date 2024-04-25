@@ -31,7 +31,6 @@
 
 ```bash
 cd backend
-cd back
 python manage.py runserver
 ```
 
