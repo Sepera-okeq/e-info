@@ -1,10 +1,12 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .serializers import *
 from .models import *
+from datetime import timedelta, datetime
+from django.utils import timezone
 
 
 class RegisterView(APIView):
@@ -26,7 +28,7 @@ class LoginView(APIView):
                 student = Student.objects.get(email=email)
                 if check_password(password, student.password):
                     login(request, student)
-                    token = Token.objects.create()
+                    token = Token.objects.create(student=student)
                     return Response({"message": "Успешный вход"}, status=status.HTTP_200_OK)
                 else:
                     return Response({"error": "Неверные данные"}, status=status.HTTP_400_BAD_REQUEST)

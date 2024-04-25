@@ -1,3 +1,5 @@
+from django.utils import timezone
+from datetime import timedelta
 from django.db import models
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import AbstractUser
@@ -25,6 +27,7 @@ class Student(AbstractUser):
 class Token(models.Model):
     token = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField(default=timezone.now() + timedelta(days=14))
     student = models.ForeignKey('Student', on_delete=models.CASCADE, blank=True, null=True)
 
 
