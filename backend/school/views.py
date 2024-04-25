@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -23,7 +24,8 @@ class LoginView(APIView):
             password = data.validated_data['password']
             try:
                 student = Student.objects.get(email=email)
-                if student.check_password(password):
+                if check_password(password, student.password):
+                    login(request, student)
                     token = Token.objects.create()
                     return Response({"message": "Успешный вход"}, status=status.HTTP_200_OK)
                 else:
@@ -31,6 +33,7 @@ class LoginView(APIView):
             except Student.DoesNotExist:
                 return Response({"error": "Неверные данные"}, status=status.HTTP_400_BAD_REQUEST)
         return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class ResetPasswordView(APIView):
