@@ -4,7 +4,7 @@ import { Metadata } from "next"
 import Image from "next/image"
 
 import { Separator } from "@/components/ui/separator"
-import { SidebarNav } from "@/app/profile/components/sidebar-nav"
+import { SidebarNav } from "@/app/profile/settings/components/sidebar-nav"
 
 
 const sidebarNavItems = [

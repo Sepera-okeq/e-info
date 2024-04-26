@@ -45,16 +45,21 @@ export default function IndexPage() {
         </div>
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Ваш профиль</h2>
+            <h2 className="text-3xl font-bold tracking-tight">Поддержка</h2>
+            <div className="flex items-center space-x-2">
+
+            </div>
           </div>
-            <Card>
-              <CardHeader>
-                Ваш никнейм: sepera_okeq
-              </CardHeader>
-              <CardContent>
-                
-              </CardContent>
+
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            
+            <Card className="col-span-4 flex items-center justify-start ">
+                <div className="ml-8">Всего вами было создано 0 тикетов, закрыто 0 тикетов.</div>
             </Card>
+            <Button>Создать</Button>
+          </div>
+
+
         </div>
       </div>
     </>
