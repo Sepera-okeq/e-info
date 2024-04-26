@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['name', 'email', 'password']
+        fields = ['username', 'email', 'password']
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -32,4 +32,4 @@ class VerifyStudentSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['name', 'email', 'tariff']
+        fields = ['username', 'email', 'tariff']

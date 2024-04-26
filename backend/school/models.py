@@ -15,8 +15,10 @@ class Article(models.Model):
 
 
 class Student(AbstractUser):
-    name = models.TextField()
-    email = models.TextField()
+    username = models.TextField(unique = False)
+    email = models.TextField(unique = True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
     password = models.TextField()
     tariff = models.ForeignKey('Tariff', on_delete=models.CASCADE, blank=True, null=True)
 
