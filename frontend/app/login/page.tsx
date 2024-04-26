@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
 
 const FormSchema = z.object({
   email: z.string().min(2, {
@@ -37,6 +38,7 @@ const FormSchema = z.object({
 
 
 export default function LoginPage() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -46,6 +48,8 @@ export default function LoginPage() {
   })
  
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    const url = 'http://127.0.0.1:8000/school/account/login';
+    console.log(JSON.stringify(data))
     toast({
       title: "Вы ввели следующие значения:",
       description: (
@@ -54,6 +58,21 @@ export default function LoginPage() {
         </pre>
       ),
     })
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+      console.log("status code:" + response.status);
+      if(response.ok) {
+        router.push('/dashboard')
+      }
+    })
+    .catch(error => console.error('Error:', error));
   }
  
 

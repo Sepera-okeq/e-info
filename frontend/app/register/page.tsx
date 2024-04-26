@@ -7,7 +7,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { UserAuthForm } from "@/app/login/components/user-auth-form"
-
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -26,7 +26,7 @@ import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 
 const FormSchema = z.object({
-  name: z.string().min(1, {
+  username: z.string().min(1, {
     message: "Имя не может быть пустым!",
   }),
   email: z.string().min(2, {
@@ -40,10 +40,12 @@ const FormSchema = z.object({
 
 
 export default function RegisterPage() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: ""
     },
@@ -51,19 +53,8 @@ export default function RegisterPage() {
  
   function onSubmit(data: z.infer<typeof FormSchema>) {
     const url = 'http://127.0.0.1:8000/school/account/register';
+    var data_response;
     console.log(JSON.stringify(data))
-    fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: '{JSON.stringify(data)}'
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
     toast({
       title: "Вы ввели следующие значения:",
       description: (
@@ -72,6 +63,21 @@ export default function RegisterPage() {
         </pre>
       ),
     })
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+      console.log("status code:" + response.status);
+      if(response.ok) {
+        router.push('/dashboard')
+      }
+    })
+    .catch(error => console.error('Error:', error));
   }
  
 
@@ -101,7 +107,7 @@ export default function RegisterPage() {
               <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
                 <FormField
                   control={form.control}
-                  name="name"
+                  name="username"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>

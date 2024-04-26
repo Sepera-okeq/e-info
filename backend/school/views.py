@@ -7,7 +7,9 @@ from .serializers import *
 from .models import *
 from datetime import timedelta, datetime
 from django.utils import timezone
+import logging
 
+logger = logging.getLogger(__name__)
 
 class RegisterView(APIView):
     def post(self, request):
@@ -31,9 +33,9 @@ class LoginView(APIView):
                     token = Token.objects.create(student=student)
                     return Response({"message": "Успешный вход"}, status=status.HTTP_200_OK)
                 else:
-                    return Response({"error": "Неверные данные"}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"message": "Неверные данные"}, status=status.HTTP_400_BAD_REQUEST)
             except Student.DoesNotExist:
-                return Response({"error": "Неверные данные"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"message": "Неверные данные"}, status=status.HTTP_400_BAD_REQUEST)
         return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -62,6 +64,6 @@ class ProfileView(APIView):
                 serializer = ProfileSerializer(student)
                 return Response({"message": " Успешное получение профиля"}, status=status.HTTP_200_OK)
             except Student.DoesNotExist:
-                return Response({"error": "Неавторизованный запрос"}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"message": "Неавторизованный запрос"}, status=status.HTTP_404_NOT_FOUND)
         else:
-            return Response({"error": "Необходима аутентификация"}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({"message": "Необходима аутентификация"}, status=status.HTTP_401_UNAUTHORIZED)
