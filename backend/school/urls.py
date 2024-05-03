@@ -1,13 +1,14 @@
-from django.urls import path
+import django.conf
+import django.urls
 
-from . import views
-from .views import *
 
-# См. https://docs.djangoproject.com/en/5.0/topics/http/urls/
 urlpatterns = [
-    path("account/register", RegisterView.as_view(), name="account_register"),
-    path("account/login", LoginView.as_view(), name="account_login"),
-    path("account/reset-password", ResetPasswordView.as_view(), name="account_reset"),
-    path("account/verify", VerifyStudentView.as_view(), name="account_verify"),
-    path("account/profile", ProfileView.as_view(), name="account_profile")
+    django.urls.path('course/', django.urls.include('course.urls')),
+    django.urls.path('users/', django.urls.include('users.urls')),
+    django.urls.path('', django.urls.include('main.urls')),
 ]
+
+if django.conf.settings.DEBUG:
+    urlpatterns += [
+        django.urls.path('__debug__/', django.urls.include('debug_toolbar.urls')),
+    ]
