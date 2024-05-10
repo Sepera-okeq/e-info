@@ -1,0 +1,47 @@
+{% extends 'includes/base.html' %}
+
+{% load static %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/fullpage.min.css' %}">
+<style>
+    #fullpage > .section {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+</style>
+{% endblock head_extra %}
+
+{% block content %}
+<div id="fullpage">
+    <div class="section text-secondary-custom">
+        <div class="px-4 text-center">
+            <h1 class="display-2 fw-bold text-white">E-Info</h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-3">
+                    Тысячи курсов ЕГЭ. #СДАЙЕГЭ<br>
+                </p>
+                <p class="mb-2">
+                    <a href="{% url 'course_overview' %}" class="btn btn-lg btn-custom my-1">
+                        Начать учиться
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+
+
+<script src="{% static 'js/fullpage.min.js' %}"></script>
+<script>
+    new fullpage(
+        '#fullpage',
+        {
+            credits: {label: 'fullPage.js'},
+            licenseKey: 'gplv3-license'
+        }
+    );
+</script>
+{% endblock content %}
