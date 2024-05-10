@@ -1,0 +1,51 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="container">
+    <h1 class="display fw-bold my-4">
+        {% if user.is_authenticated %}
+        Добро пожаловать, {% if user.first_name %}{{ user.first_name }}{% else %}@{{ user.username }}{% endif %}!
+        {% else %}Выберите свой курс{% endif %}
+    </h1>
+
+    {% if materials %}
+    <h2 class="display-6 mb-0 mt-5">Приватные материалы</h2>
+    <div class="row">
+        {% for material in materials %}
+        <div class="col-12 col-md-6 col-lg-6 col-xl-4 pt-2 pb-3">
+            <a href="{% url 'material' pk=material.id %}" class="text-decoration-none">
+                <div class="card bg-dark-custom text-white w-100 shadow-sm h-100">
+                    <div class="card-body w-100">
+                        <h2 class="h3 fw-semibold">{{ material.title }}</h2>
+                        <p class="lead mb-1">{{ material.lead }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if courses_private %}
+    <h2 class="display-6 mb-0 mt-5">Приватные курсы</h2>
+    <div class="row">
+        {% for course in courses_private %}
+        {% include 'includes/course_card.html' %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h2 class="display-6 mb-0 mt-5">Публичный доступ</h2>
+    {% if courses %}
+    <div class="row mt-2">
+        {% for course in courses %}
+        {% include 'includes/course_card.html' %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="lead">Отсутствуют курсы с публичным доступом.</p>
+    {% endif %}
+</div>
+{% endblock content %}

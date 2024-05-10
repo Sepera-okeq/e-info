@@ -1,0 +1,50 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="container">
+    <h1 class="display fw-bold my-4">
+        {% if user.is_authenticated %}
+        Добро пожаловать, {% if user.first_name %}{{ user.first_name }}{% else %}@{{ user.username }}
+        <br><br> Выберите свой курс для покупки! {% endif %}
+        {% else %}Выберите свой курс для покупки!{% endif %}
+    </h1>
+
+    {% if user.is_authenticated %}
+    {% if materials %}
+    <h2 class="display-6 mb-0 mt-5">Приватные материалы</h2>
+    <div class="row">
+        {% for material in materials %}
+        <div class="col-12 col-md-6 col-lg-6 col-xl-4 pt-2 pb-3">
+            <a href="{% url 'course_buy' type_trade=2 id_buy=material.id  %}" class="text-decoration-none">
+                <div class="card bg-dark-custom text-white w-100 shadow-sm h-100">
+                    <div class="card-body w-100">
+                        <h2 class="h3 fw-semibold">{{ material.title }}</h2>
+                        <p class="lead mb-1">{{ material.lead }}</p>
+                    </div>
+                    <a class="btn btn{% if request.path != profile_url %}-outline{% endif %}-custom me-2"
+                        href="{% url 'course_buy' type_trade=2 id_buy=material.id %}">
+                        Купить за {{ material.price }} рублей
+                    </a>
+                </div>
+            </a>
+            
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if courses_private %}
+    <h2 class="display-6 mb-0 mt-5">Приватные курсы</h2>
+    <div class="row">
+        {% for course in courses_private %}
+        {% include 'includes/course_card.html' %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% else %}
+    <h2 class="display-0 mb-0 mt-5">Вы не авторизованы!</h2>
+    {% endif %}
+</div>
+{% endblock content %}

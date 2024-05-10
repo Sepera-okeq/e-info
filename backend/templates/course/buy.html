@@ -1,0 +1,29 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="container">
+    <h1 class="display fw-bold my-4">
+        {% if user.is_authenticated %}
+        Добро пожаловать, {% if user.first_name %}{{ user.first_name }}{% else %}@{{ user.username }}{% endif %}!
+        <br><br>Вы выбрали данный товар:
+        {% else %}Ввойдите в аккаунт, чтобы купить этот товар:{% endif %}
+    </h1>
+    {% if user.is_authenticated %}
+    {% if type_trade == '1' %}
+    <h1 class="display-0 fw-bold mt-4 mb-2 text-break">{% if lessons %}Курс: {% endif %}{{ course.title }}</h1>
+    {% endif %}
+    {% if type_trade == '2' %}
+    <h1 class="display-0 fw-bold mt-4 mb-2 text-break">{% if lessons %}Материал: {% endif %}{{ material.title }}</h1>
+    {% endif %}
+
+    Вы купили данный товар!
+
+    <a class="btn btn{% if request.path != profile_url %}-outline{% endif %}-custom me-2"
+        href="{% url 'course_overview' %}">
+        Перейти к курсам
+    </a>
+    {% endif %}
+</div>
+{% endblock content %}
