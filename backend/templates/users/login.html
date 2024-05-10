@@ -1,0 +1,35 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex flex-column" style="min-height: 100vh;">
+    {% include 'includes/header.html' %}
+    
+    <div class="container d-flex flex-column justify-content-center" style="flex-grow: 1;">
+        <div class="container col-lg-5 col-sm-8 bg-dark-custom card">
+            <div class="card-body py-4 text-white">
+                <h1 class="display-5 fw-bold mb-1">Вход в аккаунт</h1>
+                <p class="mb-4">
+                    Нет аккаунта?
+                    <a href="{% url 'registration' %}" class="link-custom">Зарегистрируйтесь</a>
+                </p>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for f in form %}
+                    <div class="mb-2">
+                        <label class="required form-label" for="{{ f.id_for_label }}">{{f.label}}</label>
+                        {{ f }}
+                        {% if f.errors %}
+                        <div class="card bg-secondary-custom mt-2">
+                            <div class="card-body">{{ f.errors }}</div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-custom mt-3">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
