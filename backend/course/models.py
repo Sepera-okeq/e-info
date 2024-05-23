@@ -81,7 +81,7 @@ class Course(django.db.models.Model):
     
     class Meta:
         verbose_name = 'курс'
-        verbose_name_plural = 'курс'
+        verbose_name_plural = 'курсы'
     
     def __str__(self) -> str:
         return self.title
@@ -139,7 +139,7 @@ class Task(django.db.models.Model):
         verbose_name='Ограничение памяти',
         default=64,
         validators=[course.validators.validate_more_zero],
-        help_text='(Mb)',
+        help_text='(MB)',
     )
     input_type = django.db.models.CharField(
         verbose_name='Ввод',

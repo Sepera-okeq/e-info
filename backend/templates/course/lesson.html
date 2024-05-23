@@ -30,9 +30,9 @@
             <li class="lead">
                 <a
                     href="{% url 'course_task' pk=task.id  %}"
-                    class="task-difficulty-before-{{ task.difficulty }} color-transition"
+                    class="task-difficulty-before-{{ task.difficulty }} color-transition fw-semibold"
                 >
-                    <span class="fw-semibold">{{ task.title }}</span>
+                    {{ task.title }}
                 </a>
             </li>
             {% endfor %}
