@@ -1,9 +1,4 @@
 <div class="col-12 col-md-6 col-lg-6 col-xl-4 pt-2 pb-3">
-    {% if request.path == '/course/shop' %} 
-        <a href="{% url 'course_buy' type_trade=1 id_buy=course.id %}" class="text-decoration-none"></a>
-    {% else %}
-        <a href="{% url 'course_introduction' pk=course.id %} " class="text-decoration-none"></a>
-    {% endif %}
         <div class="card bg-dark-custom text-white w-100 shadow-sm h-100">
             <div class="card-body w-100 d-flex justify-content-between flex-column">
                 <div>
@@ -25,6 +20,11 @@
                     Купить за {{ course.price }} рублей
                 </a>
             {% endif %}
+    {% if request.path == '/course/shop' %} 
+        <a href="{% url 'course_buy' type_trade=1 id_buy=course.id %}" class="text-decoration-none badge rounded-pill"></a>
+    {% else %}
+        <a href="{% url 'course_introduction' pk=course.id %} " class="text-decoration-none badge rounded-pill">Открыть</a>
+    {% endif %}
         </div>
     </a>
 </div>
