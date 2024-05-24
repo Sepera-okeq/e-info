@@ -4,7 +4,7 @@
 {% include 'includes/header.html' %}
 
 <div class="container">
-    <h1 class="display-2 fw-bold mt-4 mb-2 text-break">Тема: {{ lesson.title }}</h1>
+    <h1 class="display-6 fw-bold mt-4 mb-2 text-break">Тема: {{ lesson.title }}</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -30,9 +30,9 @@
             <li class="lead">
                 <a
                     href="{% url 'course_task' pk=task.id  %}"
-                    class="task-difficulty-before-{{ task.difficulty }} color-transition"
+                    class="task-difficulty-before-{{ task.difficulty }} color-transition fw-semibold"
                 >
-                    <span class="fw-semibold">{{ task.title }}</span>
+                    {{ task.title }}
                 </a>
             </li>
             {% endfor %}
@@ -41,7 +41,7 @@
     {% endif %}
 
     {% if next_lesson %}
-    <a href="{% url 'course_lesson' pk=next_lesson.id  %}" class="btn btn-custom mt-3">Следующий урок</a>
+    <a href="{% url 'course_lesson' pk=next_lesson.id  %}" class="btn btn-custom mt-3" style="margin-bottom: 1em">Следующий урок</a>
     {% else %}
     <p class="mt-4 mb-0 fw-semibold lead">Это - последний урок в этом курсе</p>
     <a href="{% url 'course_overview'  %}" class="btn btn-custom mt-3">Ко всем курсам</a>

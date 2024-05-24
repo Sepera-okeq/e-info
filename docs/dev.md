@@ -23,7 +23,10 @@
 
 ```bash
 cd backend
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
+DEBUG=True HOST=localhost SECRET_KEY=sonya python manage.py runserver
 ```
 
 ### Работа frontend
